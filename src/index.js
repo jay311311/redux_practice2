@@ -1,17 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import {createStore} from "redux"
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const ul = document.querySelector("ul")
+const input = document.querySelector("input")
+const form = document.querySelector("form")
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const ADD_TODO = "addTodo"
+const DELETE_TODO = "deleteTodo"
+
+const reducer = (state, action ) => {
+  console.log(action)
+  switch(action.type){
+    case ADD_TODO : return []
+    case DELETE_TODO: return []
+    default :return state
+  } 
+}
+
+const stateStore = createStore(reducer)
+
+const handleSubmit = (event) => {
+  event.preventDefault()
+  const todo = input.value
+  input.value=""
+  stateStore.dispatch({type:ADD_TODO, text:todo}) 
+  
+}
+
+form.addEventListener("submit", handleSubmit)
